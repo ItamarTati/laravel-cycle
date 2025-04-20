@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laravel Request Lifecycle Flowchart</title>
+    <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            flowchart: { curve: 'basis' }
+        });
+    </script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .mermaid {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="mermaid">
+        graph TD
+            A[HTTP Request] -->|Enters| B[Index.php]
+            B -->|Loads| C[Application Bootstrap]
+            C -->|Routes| D[Router]
+            D -->|Matches| E[Middleware]
+            E -->|Processes| F[Controller]
+            F -->|Interacts with| G[Model/Eloquent ORM]
+            G -->|Queries| H[Database]
+            H -->|Returns| G
+            G -->|Passes to| F
+            F -->|Renders| I[View/Blade]
+            I -->|Generates| J[HTTP Response]
+            J -->|Returns to| A
+            A -->|Cycle Repeats| A
+    </div>
+</body>
+</html>
